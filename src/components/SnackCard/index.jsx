@@ -21,4 +21,4 @@ const PokemonCard = ({ id, name, healthy, vegetarian, votes, vote, deleteSnack }
     </div>
 };
 
-export default SnackCard;
+export default PokemonCard;
