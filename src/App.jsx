@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { HomePage, SnackPage, SnacksPage, BestSnackPage, AddSnackPage, NotFoundPage } from './pages';
+import { HomePage, PokemonPage, PokemonsPage, MyPokedex, NotFoundPage } from './pages';
 import { PageWrapper } from './components';
 
 import './assets/app.css';
@@ -11,10 +11,10 @@ const App = () => {
         <Routes>
             <Route path="/" element={<PageWrapper />}>
                 <Route index element={<HomePage />} />
-                <Route path="snacks" element={<SnacksPage />} />
-                <Route path="snacks/:id" element={<SnackPage />} />
-                <Route path="best" element={<BestSnackPage />} />
-                <Route path="add" element={<AddSnackPage />} />
+                <Route path="all" element={<PokemonsPage />} />
+                <Route path="pokemon/:name" element={<PokemonPage />} />
+                <Route path="pokemon" element={<Pokemon />} />
+                <Route path="myPoke" element={<MyPokedex />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Route>
         </Routes>

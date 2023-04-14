@@ -7,13 +7,13 @@ const PageWrapper = () => {
         <header>
             <nav>
                 <NavLink to="/" style={styles}>Home</NavLink>
-                <NavLink to="/snacks" style={styles}>All snacks</NavLink>
-                <NavLink to="/best" style={styles}>Best snack ever</NavLink>
-                <NavLink to="/add" style={styles}>Add your favorite snack</NavLink>
+                <NavLink to="/all" style={styles}>All Pokemon!</NavLink>
+                <NavLink to="/myPoke" style={styles}>My Pokedex</NavLink>
+                {/* <NavLink to="/add" style={styles}>Add your favorite snack</NavLink> */}
             </nav>
         </header>
         <Outlet />
-        <footer>Snack Rankings 2022</footer>
+        <footer>Pokedex 2023</footer>
     </>
 };
 

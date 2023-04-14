@@ -5,10 +5,10 @@ const linkStyle = {
     color: '#875053'
   };
 
-const SnackCard = ({ id, name, healthy, vegetarian, votes, vote, deleteSnack }) => {
+const PokemonCard = ({ id, name, healthy, vegetarian, votes, vote, deleteSnack }) => {
 
     return <div className='snack-card'>
-        <h3><Link to={`/snacks/${id}`} style={linkStyle}>{name}</Link></h3>
+        <h3><Link to={`/pokemon/${name}`} style={linkStyle}>{name}</Link></h3>
         <p><span className="votes-counter">Votes: {votes}</span></p>
         <p className="snack-details-holder">
             { vegetarian ? <span className="vegetarian icon">V</span> : ""}
