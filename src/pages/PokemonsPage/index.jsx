@@ -1,69 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { SnackFilters, SnackCard } from '../../components';
+import { PokemonCard } from '../../components';
 
-// https://pokeapi.co/api/v2/pokemon?limit=151
+// API URL - https://pokeapi.co/api/v2/pokemon?limit=151
+// IMAGE END POINT - https://pokeapi.co/api/v2/pokemon/{id or name}/
 
 const PokemonsPage = () => {
 
     const [pokemons, setPokemons] = useState([]);
-    const [healthyOnly, setHealthyOnly] = useState(false);
-    const [vegetarianOnly, setVegetarianOnly] = useState(false);
-    const [textFilter, setTextFilter] = useState("");
-
-    // async function vote(id, value) {
-    //     const options = {
-    //         method: "PATCH",
-    //         headers: { 'Content-Type': 'application/json' },    
-    //         body: JSON.stringify({
-    //             votes: value
-    //         })
-    //     }
-    //     const response = await fetch(`http://localhost:3000/snacks/${id}`, options);
-    //     const data = await response.json();
-        
-    //     setSnacks(snacks.map(s => s.id == data.id ? { ...s, votes: data.votes } : s))
-    // }
-
-    // async function deleteSnack(id) {
-    //     const options = {
-    //         method: "DELETE",
-    //         headers: { 'Content-Type': 'application/json' }
-    //     }
-    //     const response = await fetch(`http://localhost:3000/snacks/${id}`, options);
-    //     await response.json();
-    // }
+    const [pokemonsInfo, setPokemonsInfo] = useState([]);
+    // console.log('pokemons', pokemons)
+    // console.log('info', pokemonsInfo)
+    // const [caught, setCaught] = useState(false);
+    // const [textFilter, setTextFilter] = useState("");
 
     useEffect(() => {
         async function loadPokemon() {
             const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
-            const data = await response.json();
-            setPokemons(data);
+            const rawData = await response.json();
+            const data = rawData.results
+            setPokemons(data)
+            data.map(async (pokemon) => {
+                let pokemonName = pokemon.name
+                const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`)
+                const data = await res.json();
+                setPokemonsInfo(...pokemonsInfo, data)
+            })
         };
         
         loadPokemon();
-    }, [pokemons])
+    }, [])
+
+    function getPokeInfo(pokemon) {
+        let info = Object.values(pokemonsInfo).filter(info => pokemonsInfo.name == pokemon.name)
+        for (let i in info) {
+            if (i != []) return i
+        }
+    }
 
     function displayPokemons() {
-        return snacks
-                .filter(s => !vegetarianOnly || s.vegetarian)
-                .filter(s => !healthyOnly || s.healthy)
-                .filter(s => textFilter.length == 0 || s.name.toLowerCase().includes(textFilter.toLowerCase()))
-                .map(s => <SnackCard key={s.id} id={s.id} name={s.name}
-                            vegetarian={s.vegetarian}
-                            votes={s.votes} vote={vote} deleteSnack={deleteSnack} />)
-    }
+        return pokemons.map(pokemon => (
+            <PokemonCard pokemon={pokemon} info={getPokeInfo(pokemon)} />
+        ))
+    };
 
     return <main className="snack-main">
         <h1>All original Pokemon!</h1>
-        <SnackFilters healthyOnly={healthyOnly} vegetarianOnly={vegetarianOnly} textFilter={textFilter}
-            setHealthyOnly={setHealthyOnly} setVegetarianOnly={setVegetarianOnly} setTextFilter={setTextFilter}
-        />
+        {}
         <div className="snack-holder">
-            { displaySnacks() }
+            { displayPokemons() }
         </div>
     </main>
 };
 
-export default SnacksPage;
+export default PokemonsPage;

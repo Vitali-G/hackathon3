@@ -7,11 +7,11 @@ export default function Pokemon() {
         async function loadPokemon() {
             const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
             const data = await response.json();
-            setPokemons(data);
+            setPokemons(data['results']);
         };
         
         loadPokemon();
-    }, [pokemons])
+    }, [])
 
     return (
     <div>Pokemon test page</div>

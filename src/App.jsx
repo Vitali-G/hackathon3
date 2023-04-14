@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { HomePage, PokemonPage, PokemonsPage, MyPokedex, NotFoundPage } from './pages';
+import { HomePage, PokemonPage, PokemonsPage, MyPokedex, NotFoundPage, Pokemon } from './pages';
 import { PageWrapper } from './components';
 
 import './assets/app.css';
