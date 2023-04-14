@@ -6,6 +6,7 @@ const linkStyle = {
   };
 
 const PokemonCard = ({ pokemon }) => {
+    console.log(pokemon)
     console.log(pokemon.name)
 
     return <div className='snack-card'>

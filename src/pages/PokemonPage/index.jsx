@@ -4,10 +4,14 @@ import { Link, useParams } from 'react-router-dom';
 const PokemonPage = () => {
 
     const [loading, setLoading] = useState(false);
-    const [pokemon, setPokemon] = useState({});
+    const [pokemon, setPokemon] = useState({sprites: []});
     let { name } = useParams();
-    console.log(name)
-
+    // console.log(pokemon.types[0].type["type"]);
+    // const types = pokemon.types
+    // types.forEach(element => {
+    //     console.log(element);
+    // });
+    
     useEffect(() => {
 
         setLoading(true);
@@ -26,6 +30,8 @@ const PokemonPage = () => {
     function displayPokemon() {
         return <main>
             <h1 className="close-title">{pokemon.name}</h1>
+            <img src={pokemon.sprites["front_default"]} alt="" />
+            {/* <p>{pokemon.types}</p> */}
             {/* <p><em>{snack.description}</em></p>
             <span className="votes-counter">Votes: {snack.votes}</span>
             <p className="snack-details-holder">
